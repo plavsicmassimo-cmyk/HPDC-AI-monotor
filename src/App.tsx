@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHPDCStore } from './store/hpdcStore';
+import { useTrainingStore } from './store/trainingStore';
 import { useSimulation } from './hooks/useSimulation';
+import { useTrainingSimulation } from './hooks/useTrainingSimulation';
 import { Sidebar } from './components/Layout/Sidebar';
 import { Header } from './components/Layout/Header';
 import { DashboardPage } from './pages/DashboardPage';
@@ -9,9 +11,28 @@ import { ThermalPage } from './pages/ThermalPage';
 import { ParametersPage } from './pages/ParametersPage';
 import { AlarmsPage } from './pages/AlarmsPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
+import { TrainingDashboardPage } from './pages/training/TrainingDashboardPage';
+import { DiagnosisPage } from './pages/training/DiagnosisPage';
+import { ContentPage } from './pages/training/ContentPage';
+import { AssessmentPage } from './pages/training/AssessmentPage';
+import { CoachingPage } from './pages/training/CoachingPage';
+import { TrainingAnalyticsPage } from './pages/training/TrainingAnalyticsPage';
 
 function PageContent() {
   const activePage = useHPDCStore((s) => s.activePage);
+  const activeTrainingPage = useTrainingStore((s) => s.activeTrainingPage);
+
+  if (activePage === 'training') {
+    switch (activeTrainingPage) {
+      case 'training-dashboard':  return <TrainingDashboardPage />;
+      case 'training-diagnosis':  return <DiagnosisPage />;
+      case 'training-content':    return <ContentPage />;
+      case 'training-assessment': return <AssessmentPage />;
+      case 'training-coaching':   return <CoachingPage />;
+      case 'training-analytics':  return <TrainingAnalyticsPage />;
+      default:                    return <TrainingDashboardPage />;
+    }
+  }
 
   switch (activePage) {
     case 'dashboard':  return <DashboardPage />;
@@ -26,6 +47,7 @@ function PageContent() {
 
 export default function App() {
   useSimulation();
+  useTrainingSimulation();
 
   return (
     <div className="flex h-screen bg-[#0d1117] overflow-hidden">
