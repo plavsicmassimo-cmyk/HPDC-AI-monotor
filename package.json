@@ -1,7 +1,7 @@
 {
-  "name": "hpdc-ai-monitor",
+  "name": "imds-module-creator",
   "version": "1.0.0",
-  "description": "High Pressure Die Casting AI Monitor - Real-time monitoring and parameter control",
+  "description": "AI-assisted IMDS module creation, REACH/RoHS compliance checking, and material datasheet generation",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "recharts": "^2.10.3",
+    "react-router-dom": "^6.22.0",
     "zustand": "^4.4.7",
     "lucide-react": "^0.294.0",
     "clsx": "^2.0.0"
