@@ -1,41 +1,71 @@
-import React from 'react';
-import { useHPDCStore } from './store/hpdcStore';
-import { useSimulation } from './hooks/useSimulation';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Sidebar } from './components/Layout/Sidebar';
 import { Header } from './components/Layout/Header';
 import { DashboardPage } from './pages/DashboardPage';
-import { InjectionPage } from './pages/InjectionPage';
-import { ThermalPage } from './pages/ThermalPage';
-import { ParametersPage } from './pages/ParametersPage';
-import { AlarmsPage } from './pages/AlarmsPage';
-import { AnalyticsPage } from './pages/AnalyticsPage';
+import { NewModulePage } from './pages/NewModulePage';
+import { ModuleEditorPage } from './pages/ModuleEditorPage';
+import { DatasheetPage } from './pages/DatasheetPage';
+import { KnowledgeBasePage } from './pages/KnowledgeBasePage';
+import { SettingsPage } from './pages/SettingsPage';
 
-function PageContent() {
-  const activePage = useHPDCStore((s) => s.activePage);
-
-  switch (activePage) {
-    case 'dashboard':  return <DashboardPage />;
-    case 'injection':  return <InjectionPage />;
-    case 'thermal':    return <ThermalPage />;
-    case 'parameters': return <ParametersPage />;
-    case 'alarms':     return <AlarmsPage />;
-    case 'analytics':  return <AnalyticsPage />;
-    default:           return <DashboardPage />;
-  }
-}
-
-export default function App() {
-  useSimulation();
-
+function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen bg-[#0d1117] overflow-hidden">
+    <div className="flex h-screen bg-slate-100 overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-y-auto">
-          <PageContent />
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/modules/:id/datasheet" element={<DatasheetPage />} />
+        <Route
+          path="/"
+          element={
+            <AppShell>
+              <DashboardPage />
+            </AppShell>
+          }
+        />
+        <Route
+          path="/modules/new"
+          element={
+            <AppShell>
+              <NewModulePage />
+            </AppShell>
+          }
+        />
+        <Route
+          path="/modules/:id"
+          element={
+            <AppShell>
+              <ModuleEditorPage />
+            </AppShell>
+          }
+        />
+        <Route
+          path="/knowledge-base"
+          element={
+            <AppShell>
+              <KnowledgeBasePage />
+            </AppShell>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <AppShell>
+              <SettingsPage />
+            </AppShell>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

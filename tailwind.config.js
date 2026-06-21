@@ -4,35 +4,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        surface: {
-          900: '#0d1117',
-          800: '#161b22',
-          700: '#21262d',
-          600: '#30363d',
-          500: '#484f58',
+        brand: {
+          900: '#06243d',
+          800: '#0b3d66',
+          700: '#0f4f82',
+          600: '#15639d',
+          500: '#1e7bbf',
+          100: '#e3eef6',
+          50: '#f3f8fb',
         },
-        accent: {
-          cyan: '#22d3ee',
-          teal: '#2dd4bf',
-          blue: '#60a5fa',
-          green: '#4ade80',
-          yellow: '#facc15',
-          orange: '#fb923c',
-          red: '#f87171',
+        slate: {
+          950: '#0b1620',
+        },
+        status: {
+          draft: '#6b7280',
+          review: '#b45309',
+          sent: '#1d4ed8',
+          accepted: '#15803d',
+          rejected: '#b91c1c',
+        },
+        compliance: {
+          pass: '#15803d',
+          warn: '#b45309',
+          fail: '#b91c1c',
         },
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-      },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'blink': 'blink 1s step-end infinite',
-      },
-      keyframes: {
-        blink: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' },
-        },
+        sans: ['Inter', 'Segoe UI', 'Arial', 'sans-serif'],
       },
     },
   },
